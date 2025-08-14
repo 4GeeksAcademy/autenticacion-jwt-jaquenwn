@@ -11,10 +11,10 @@ export const Single = props => {
 
   // Retrieve the 'theId' URL parameter using useParams hook.
   const { theId } = useParams()
-
+let usuario= JSON.parse(localStorage.getItem("usuario"))
   return (
     <div className="container text-center">
-      <h1>Bienvenido</h1>
+      <h1>Bienvenido {usuario.email}</h1>
     </div>
   );
 };

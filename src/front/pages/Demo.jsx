@@ -27,6 +27,8 @@ export const Demo = () => {
       const data = await response.json()
       console.log (data)
       if(response.status==200){
+        localStorage.setItem("access_token",data.access_token)
+        localStorage.setItem("usuario",JSON.stringify(data.usuario))
         navigate("/single/1")
       } else{
         alert(data.msg)

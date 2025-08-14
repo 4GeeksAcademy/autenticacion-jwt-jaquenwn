@@ -44,3 +44,21 @@ def login():
         "usuario":usuario.serialize()
     }
     return jsonify(response_body), 200
+
+@api.route("/register", methods=["POST"])
+def register():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+
+    usuario= User.query.filter_by(email=email).first()
+    if usuario is None:
+
+        new_user= User(
+            email=email,
+            password=password,
+            is_active=True
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({"msg": "El usuario fue registrado"}), 201
+    return jsonify({"msg": "El usuario existe"}), 302
